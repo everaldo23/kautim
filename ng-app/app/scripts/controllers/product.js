@@ -13,29 +13,34 @@ angular.module('kautimApp')
     $http
       .get('/api/products')
       .success( function(data) {
-        $scope.stuff = data;
-        console.log($scope.stuff);
+        $scope.products = data;
+        console.log($scope.products);
       });
 
-    $scope.products = [
-      {
-        name: 'Cookies', price: 5
-      },
-      {
-        name: 'Scarves', price: 4
-      },
-      {
-        name: 'Quilts', price: 10
-      }
-    ];
     $scope.addProduct = function(name, price){
-      $scope.name = name;
-      $scope.price = price;
       $scope.products.push({name:name, price:price});
+      $http
+        .post('/api/products', {name: name, price: price})
+        .success(function (data) {
+          console.log(data);
+        });
       $scope.name = '';
       $scope.price = '';
     };
+
     $scope.removeProducts = function() {
-      $scope.products = [];
+      $http
+        .delete('api/erase')
+        .success(function() {
+          $scope.products = [];
+        });
+    };
+
+    $scope.ditchProduct = function (id){
+      $http
+        .delete('api/products/' + id)
+        .success(function () {
+          $scope.products = [];
+        })
     };
   });

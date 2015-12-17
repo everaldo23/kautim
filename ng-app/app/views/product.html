@@ -1,22 +1,24 @@
 <p>Products</p>
 <form ng-submit="addProduct(name,price)">
-  <input type="text" ng-model="name" placeholder="Name">
-  <input type="number" ng-model="price" value="0" placeholder="Price" step="any" >
+  <input type="text" ng-model="name" placeholder="Name" required>
+  <input type="number" ng-model="price" value="0" placeholder="Price" step="any" required>
   <input class="btn-primary" type="submit" value="Add">
-  <input type="submit" class="btn-danger" ng-click="removeProducts()" value="Clear list">
 </form>
 <div>
-  <table >
+  <table>
+    <input type="submit" class="btn-danger" ng-click="removeProducts()" value="Clear list">
     <th>
       <tr>
         <td>Name</td>
         <td>Price</td>
+        <td>Options</td>
       </tr>
     </th>
     <td>
       <tr ng-repeat="thing in products">
-        <td>{{thing.name}}</td>
-        <td>{{thing.price | currency : "RM " }}</td>
+        <td><p>{{thing.name}}</p></td>
+        <td><p>{{thing.price | currency : "RM " }}</p></td>
+        <td><input type="submit" class="btn-danger" ng-click="ditchProduct({{thing.id}})" value="Remove product"></td>
       </tr>
     </td>
   </table>

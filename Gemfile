@@ -12,6 +12,7 @@ gem 'sqlite3'
 
 gem 'rack-cors', '~> 0.3.1'
 
+gem 'active_model_serializers', '0.9.3'
 
 
 # To use ActiveModel has_secure_password

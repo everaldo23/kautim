@@ -13,7 +13,6 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   grunt.loadNpmTasks('grunt-connect-proxy');
-  var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
   // Automatically load required Grunt tasks
   require('jit-grunt')(grunt, {
@@ -87,7 +86,7 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect,options) {
+          middleware: function (connect) {
             return [
               require('grunt-connect-proxy/lib/utils').proxyRequest,
               connect.static('.tmp'),
@@ -101,7 +100,7 @@ module.exports = function (grunt) {
               ),
               connect.static(appConfig.app)
 
-            ]
+            ];
           }
         }
       },
