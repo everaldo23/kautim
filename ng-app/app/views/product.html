@@ -17,9 +17,13 @@
     <td>
       <tr ng-repeat="thing in products">
         <td><p>{{thing.name}}</p></td>
-        <td><p>{{thing.price | currency : "RM " }}</p></td>
-        <td><input type="submit" class="btn-danger" ng-click="ditchProduct({{thing.id}})" value="Remove product"></td>
+        <td><p editable-text="thing.price" onaftersave="editProduct(thing.id,thing.name,thing.price)">{{thing.price | currency : "RM " }}</p></td>
+        <td>
+          <input type="submit" class="btn-danger" ng-click="ditchProduct({{thing.id}})" value="Remove">
+        </td>
       </tr>
     </td>
   </table>
 </div>
+
+
