@@ -14,6 +14,15 @@ class Api::ProductsController < ApplicationController
     end
   end
 
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      render json: @product, status: "Product updated"
+    else
+      render json: @product.errors, status: :unprocessable_entity
+    end
+  end
+
   def erase
     Product.destroy_all
   end
