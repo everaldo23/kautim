@@ -10,9 +10,11 @@ gem 'spring', :group => :development
 
 gem 'sqlite3'
 
-gem 'rack-cors', '~> 0.3.1'
+gem 'rack-cors', '~> 0.3.1', :require => 'rack/cors'
 
 gem 'active_model_serializers', '0.9.3'
+
+gem 'devise'
 
 
 # To use ActiveModel has_secure_password

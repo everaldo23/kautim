@@ -16,9 +16,10 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'xeditable'
+    'xeditable',
+    'Devise'
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $httpProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -35,10 +36,20 @@ angular
         controller: 'ProductCtrl',
         controllerAs: 'product'
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'register'
+      })
       .otherwise({
         redirectTo: '/'
       });
+    $httpProvider.defaults.withCredentials = true;
   })
-  .run(function(editableOptions){
+  .run(function(editableOptions, Auth){
     editableOptions.theme = 'bs3';
+    Auth.currentUser().then(function(user){
+      console.log(user);
+      console.log(Auth._currentUser);
+    });
   });
