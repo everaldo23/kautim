@@ -41,15 +41,15 @@ angular.module('kautimApp')
         .delete('api/products/' + id)
         .success(function () {
           $scope.products = [];
-        })
+        });
     };
 
     $scope.editProduct = function (id,name,price){
       $http
         .patch('api/products/' + id, {name: name, price: price})
         .success(function (data) {
-          console.log(data)
-        })
+          console.log(data);
+        });
     };
   });
 

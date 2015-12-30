@@ -17,9 +17,10 @@ angular
     'ngSanitize',
     'ngTouch',
     'xeditable',
-    'Devise'
+    'Devise',
+    'ng-token-auth'
   ])
-  .config(function ($routeProvider, $httpProvider) {
+  .config(function ($routeProvider, $httpProvider, $authProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -41,15 +42,20 @@ angular
         controller: 'RegisterCtrl',
         controllerAs: 'register'
       })
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'login'
+      })
       .otherwise({
         redirectTo: '/'
       });
     $httpProvider.defaults.withCredentials = true;
-  })
-  .run(function(editableOptions, Auth){
-    editableOptions.theme = 'bs3';
-    Auth.currentUser().then(function(user){
-      console.log(user);
-      console.log(Auth._currentUser);
+    $authProvider.configure({
+      apiUrl: 'http://localhost:3000'
     });
+  })
+  .run(function(editableOptions, $auth){
+    editableOptions.theme = 'bs3';
+    console.log($auth.validateUser());
   });

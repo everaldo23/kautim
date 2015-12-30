@@ -84,7 +84,7 @@ module.exports = function (grunt) {
         port: 3000
       },
         {
-          context: '/users',
+          context: '/auth',
           host: 'localhost',
           port: 3000
         }],
